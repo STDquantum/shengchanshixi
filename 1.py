@@ -52,12 +52,24 @@ st.title("📊 多层复合材料性能计算器")
 st.markdown("### 滑动设置各层厚度比例，并观察材料性能变化")
 
 # 材料定义
-materials = [
-    Material("A", 2700, 200, 70e9, 0.33),
-    Material("B", 1900, 0.5, 3e9, 0.25),
-    Material("C", 1500, 1.0, 2e9, 0.3),
-    Material("D", 1200, 0.05, 1e9, 0.2),
+default_materials = [
+    Material("SiC/SiC_CMC", 2700, 9, 240e9, 0.18),
+    Material("SiC_Aerogel", 250, 0.035, 5e9, 0.2),
+    Material("Kaowool", 128, 0.06, 3e9, 0.3),
+    Material("PU_Foam", 50, 0.03, 0.05e9, 0.3),
 ]
+materials = []
+for i in range(4):
+    st.markdown(f"#### 第 {i+1} 层材料")
+    cols = st.columns(5)
+    name = cols[0].text_input("名称", default_materials[i].name, key=f"name_{i}")
+    density = cols[1].number_input("密度 (kg/m³)", value=default_materials[i].density, key=f"density_{i}")
+    k = cols[2].number_input("热导率 (W/m·K)", value=default_materials[i].thermal_conductivity, key=f"k_{i}")
+    E = cols[3].number_input("杨氏模量 (GPa)", value=default_materials[i].youngs_modulus/1e9, key=f"E_{i}")
+    nu = cols[4].number_input("泊松比", value=default_materials[i].poisong_ratio, format="%.2f", key=f"nu_{i}")
+
+    mat = Material(name, density, k, E*1e9, nu)
+    materials.append(mat)
 colors = ['red', 'blue', 'green', 'orange']
 
 # 总厚度滑动条
@@ -73,17 +85,18 @@ if total_ratio == 0:
 else:
     ratios = [r / total_ratio for r in ratios]
 
-# 可视化厚度比例
-st.markdown("### 📐 层厚度可视化")
-fig, ax = plt.subplots(figsize=(2, 6))
-y = 0
+# 可视化厚度比例 - 横向堆叠图
+st.markdown("### 📐 层厚度比例图（横向）")
+fig, ax = plt.subplots(figsize=(6, 1.5))  # 控制高度变扁
+x = 0
 for i, r in enumerate(ratios):
-    ax.bar(0, r, bottom=y, color=colors[i], label=f"{materials[i].name} ({r:.2f})")
-    y += r
-ax.set_ylim(0, 1)
+    ax.barh(0, r, left=x, color=colors[i], edgecolor='black')
+    ax.text(x + r/2, 0, f"{materials[i].name}\n{r:.2f}", ha='center', va='center', color='white', fontsize=8)
+    x += r
+ax.set_xlim(0, 1)
 ax.axis('off')
-ax.legend(loc='upper right')
 st.pyplot(fig)
+
 
 # 计算结果
 result = compute_composite_properties(total_thickness, ratios, materials)
