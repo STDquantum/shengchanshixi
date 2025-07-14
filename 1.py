@@ -64,7 +64,7 @@ for i in range(4):
     cols = st.columns(5)
     name = cols[0].text_input("名称", default_materials[i].name, key=f"name_{i}")
     density = cols[1].number_input("密度 (kg/m³)", value=default_materials[i].density, key=f"density_{i}")
-    k = cols[2].number_input("热导率 (W/m·K)", value=default_materials[i].thermal_conductivity, key=f"k_{i}")
+    k = cols[2].number_input("热导率 (W/m·K)", value=default_materials[i].thermal_conductivity, format="%.3f", key=f"k_{i}")
     E = cols[3].number_input("杨氏模量 (GPa)", value=default_materials[i].youngs_modulus/1e9, key=f"E_{i}")
     nu = cols[4].number_input("泊松比", value=default_materials[i].poisong_ratio, format="%.2f", key=f"nu_{i}")
 
