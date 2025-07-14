@@ -49,7 +49,7 @@ def compute_composite_properties(total_thickness, thickness_ratios, materials):
 
 # 设置页面
 st.title("📊 多层复合材料性能计算器")
-st.markdown("### 滑动设置各层厚度比例，并观察材料性能变化")
+st.markdown("### 🐈 设置材料参数")
 
 # 材料定义
 default_materials = [
@@ -76,7 +76,7 @@ colors = ['red', 'blue', 'green', 'orange']
 total_thickness = st.slider("总厚度 (cm)", min_value=5.0, max_value=10.0, value=6.0, step=0.1) / 100  # m
 
 # 比例滑动条：动态归一化
-st.markdown("### 各层厚度比例设置")
+st.markdown("### 🛹 各层厚度比例设置")
 ratios = [st.slider(f"层 {i+1} 比例", 0.0, 1.0, 0.25, 0.01, key=f"layer_{i}") for i in range(4)]
 
 total_ratio = sum(ratios)
