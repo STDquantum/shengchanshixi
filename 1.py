@@ -66,7 +66,7 @@ st.markdown("### 🐈 设置材料参数")
 # 材料定义
 default_materials = [
     Material("SiC/SiC_CMC", 2700, 9, 240e9, 0.18, 620, 5000 * 2700),
-    Material("SiC_Aerogel", 250, 0.035, 5e9, 0.2, 1273, 5588),
+    Material("SiC_Aerogel", 250, 0.018, 5e9, 0.2, 1273, 5588),
     Material("Kaowool", 128, 0.06, 3e9, 0.3, 1089, 1380.5),
     Material("PU_Foam", 50, 0.03, 0.05e9, 0.3, 2500, 43.07 * 50),
 ]
@@ -87,7 +87,7 @@ for i in range(4):
 colors = ['red', 'blue', 'green', 'orange']
 
 # 总厚度滑动条
-total_thickness = st.slider("总厚度 (cm)", min_value=5.0, max_value=10.0, value=6.0, step=0.1) / 100  # m
+total_thickness = st.slider("总厚度 (cm)", min_value=5.0, max_value=10.3, value=6.0, step=0.1) / 100  # m
 
 # 比例滑动条：动态归一化
 st.markdown("### 🛹 各层厚度比例设置")

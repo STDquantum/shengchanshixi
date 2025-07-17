@@ -1,0 +1,25 @@
+[1] Technical Requirements for Lunar Structures. Alexander M. Jablonski and Kelly A. Ogden. JOURNAL OF AEROSPACE ENGINEERING © ASCE / APRIL 2008
+[2] National Academies of Sciences, Engineering, and Medicine. 1998. Ceramic Fibers and Coatings: Advanced Materials for the Twenty-First Century. Washington, DC: The National Academies Press.
+[3] Table of specific heat capacities. https://en.wikipedia.org/wiki/Table_of_specific_heat_capacities 引用日期 20250717
+[4] Highly Oriented SiC@SiO2 Ceramic Fiber Aerogels with Good Anisotropy of the Thermal Conductivity and High-Temperature Resistance. Zheng Zhang, Cui Liu, Nian Li, Wei Guo, Ying Li, Pengzhan Yang, Shudong Zhang, Zhenyang Wang. First published: 06 March 2025. Volume12, Issue17. May 8, 2025. advanced science.
+[5] 硅酸铝陶瓷纤维毯. 淘宝. https://e.tb.cn/h.hjMq2hOGn89CuWB?tk=S9wk4XMloE4
+[6]  Thermophysical properties of polyurethane foams and their melts
+June 2014  Fire and Materials 
+DOI:10.1002/fam.2188
+Authors: 
+Michael Spearpoint
+Dennis Pau
+Charles Fleischmann
+K.Y. Li
+[7] Hypervelocity impact testing of advanced materials and structures for micrometeoroid and orbital debris shielding.  
+Acta Astronautica, Volume 83, p. 216-231.Ryan, Shannon ;Christiansen, Eric L.
+ Pub Date: February 2013
+[8]A review of shielding systems for protecting off-earth structures from micrometeoroid and orbital debris impact.Md Abdur Rakib
+, 
+Scott T. Smith
+, 
+T. Tafsirojjaman
+ Acta Astronautica
+Volume 223, October 2024, Pages 404-425
+[9] 多层复合材料性能计算器. STDquantum. https://stdquantum-shengchanshixi-1-e8ijvk.streamlit.app/
+
