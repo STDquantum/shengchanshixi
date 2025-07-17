@@ -68,7 +68,7 @@ default_materials = [
     Material("SiC/SiC_CMC", 2700, 9, 240e9, 0.18, 620, 5000 * 2700),
     Material("SiC_Aerogel", 250, 0.035, 5e9, 0.2, 1273, 5588),
     Material("Kaowool", 128, 0.06, 3e9, 0.3, 1089, 1380.5),
-    Material("PU_Foam", 50, 0.03, 0.05e9, 0.3, 1450, 43.07 * 50),
+    Material("PU_Foam", 50, 0.03, 0.05e9, 0.3, 2500, 43.07 * 50),
 ]
 materials = []
 for i in range(4):
