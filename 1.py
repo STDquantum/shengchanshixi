@@ -3,12 +3,13 @@ import matplotlib.pyplot as plt
 
 # Material 类
 class Material:
-    def __init__(self, name, density, thermal_conductivity=None, youngs_modulus=None, poisong_ratio=None):
+    def __init__(self, name, density, thermal_conductivity=None, youngs_modulus=None, poisong_ratio=None, capacity=None):
         self.name = name
         self.density = density
         self.thermal_conductivity = thermal_conductivity
         self.youngs_modulus = youngs_modulus
         self.poisong_ratio = poisong_ratio
+        self.capacity = capacity
 
 # 计算复合材料属性
 def compute_composite_properties(total_thickness, thickness_ratios, materials):
@@ -17,6 +18,7 @@ def compute_composite_properties(total_thickness, thickness_ratios, materials):
     E_list = [m.youngs_modulus for m in materials]
     nu_list = [m.poisong_ratio for m in materials]
     rho_list = [m.density for m in materials]
+    c_rho_list = [m.capacity for m in materials] # cp_values: list of c_p (单位 J/kg·K)，长度为4
 
     # 热导率
     k_parallel = sum(w[i] * k_list[i] for i in range(4))
@@ -32,6 +34,10 @@ def compute_composite_properties(total_thickness, thickness_ratios, materials):
 
     # 密度（平均即可）
     density = sum(w[i] * rho_list[i] for i in range(4))
+    
+    total_mass = sum(w[i] * rho_list[i] for i in range(4))
+    cp_mass = sum(w[i] * rho_list[i] * c_rho_list[i] for i in range(4)) / total_mass
+
 
     return {
         "parallel": {
@@ -44,7 +50,8 @@ def compute_composite_properties(total_thickness, thickness_ratios, materials):
             "youngs_modulus": E_perpendicular,
             "poisson_ratio": nu_perpendicular
         },
-        "density": density
+        "density": density,
+        "cp_mass": cp_mass,
     }
 
 # 设置页面
@@ -53,10 +60,10 @@ st.markdown("### 🐈 设置材料参数")
 
 # 材料定义
 default_materials = [
-    Material("SiC/SiC_CMC", 2700, 9, 240e9, 0.18),
-    Material("SiC_Aerogel", 250, 0.035, 5e9, 0.2),
-    Material("Kaowool", 128, 0.06, 3e9, 0.3),
-    Material("PU_Foam", 50, 0.03, 0.05e9, 0.3),
+    Material("SiC/SiC_CMC", 2700, 9, 240e9, 0.18, 620),
+    Material("SiC_Aerogel", 250, 0.035, 5e9, 0.2, 1273),
+    Material("Kaowool", 128, 0.06, 3e9, 0.3, 1089),
+    Material("PU_Foam", 50, 0.03, 0.05e9, 0.3, 1450),
 ]
 materials = []
 for i in range(4):
@@ -67,6 +74,7 @@ for i in range(4):
     k = cols[2].number_input("热导率 (W/m·K)", value=default_materials[i].thermal_conductivity, format="%.3f", key=f"k_{i}")
     E = cols[3].number_input("杨氏模量 (GPa)", value=default_materials[i].youngs_modulus/1e9, key=f"E_{i}")
     nu = cols[4].number_input("泊松比", value=default_materials[i].poisong_ratio, format="%.2f", key=f"nu_{i}")
+    c_rho = cols[4].number_input("比热容 (J/kg·K)", value=default_materials[i].capacity, key=f"c_rho_{i}")
 
     mat = Material(name, density, k, E*1e9, nu)
     materials.append(mat)
@@ -104,6 +112,7 @@ result = compute_composite_properties(total_thickness, ratios, materials)
 # 显示参数
 st.markdown("### 📈 有效性能参数")
 st.write(f"**密度**: {result['density']:.2f} kg/m³")
+st.write(f"**比热容**: {result['cp_mass']:.2f} J/kg·K")
 
 col1, col2 = st.columns(2)
 with col1:
