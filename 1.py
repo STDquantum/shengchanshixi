@@ -76,7 +76,7 @@ for i in range(4):
     nu = cols[4].number_input("泊松比", value=default_materials[i].poisong_ratio, format="%.2f", key=f"nu_{i}")
     c_rho = cols[4].number_input("比热容 (J/kg·K)", value=default_materials[i].capacity, key=f"c_rho_{i}")
 
-    mat = Material(name, density, k, E*1e9, nu)
+    mat = Material(name, density, k, E*1e9, nu, c_rho)
     materials.append(mat)
 colors = ['red', 'blue', 'green', 'orange']
 
@@ -112,7 +112,7 @@ result = compute_composite_properties(total_thickness, ratios, materials)
 # 显示参数
 st.markdown("### 📈 有效性能参数")
 st.write(f"**密度**: {result['density']:.2f} kg/m³")
-st.write(f"**比热容**: {result['cp_mass']:.2f} J/kg·K")
+st.write(f"**比热容**: {result['cp_mass']:.0f} J/kg·K")
 
 col1, col2 = st.columns(2)
 with col1:
